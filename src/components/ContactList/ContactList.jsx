@@ -43,11 +43,11 @@ export const ContactList = () => {
   );
 };
 
-// ContactList.propTypes = {
-//   // onDelete: PropTypes.func.isRequired,
-//   contacs: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//     })
-//   ),
-// };
+ContactList.propTypes = {
+  // onDelete: PropTypes.func.isRequired,
+  contacs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })
+  ),
+};
