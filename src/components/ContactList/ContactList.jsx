@@ -10,22 +10,28 @@ export const ContactList = () => {
   console.log(contacts);
   const filter = useSelector(getFilter);
 
-  const visibleContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
-  );
+  // const visibleContacts = contacts.filter(({ name }) =>
+  //   name.toLowerCase().includes(filter)
+  // );
 
-  const normalizedFilter = filter.toLowerCase();
+  // const normalizedFilter = filter.toLowerCase();
   const filteredContacts = contacts?.filter(contact =>
-    contact?.name?.toLowerCase().includes(normalizedFilter)
+    contact?.name?.toLowerCase().includes(filter.toLowerCase())
   );
 
   if (!filteredContacts?.length) {
     alert('No contacts matching your request');
   }
 
+  const store = useSelector(store => store);
+  console.log(store);
+
+  const contactsStore = useSelector(store => store.contacts);
+  console.log(contactsStore);
+
   return (
     <ListContasts>
-      {visibleContacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <ContactItem
           key={id}
           id={id}
@@ -38,11 +44,11 @@ export const ContactList = () => {
   );
 };
 
-ContactList.propTypes = {
-  // onDelete: PropTypes.func.isRequired,
-  contacs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    })
-  ),
-};
+// ContactList.propTypes = {
+//   // onDelete: PropTypes.func.isRequired,
+//   contacs: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//     })
+//   ),
+// };

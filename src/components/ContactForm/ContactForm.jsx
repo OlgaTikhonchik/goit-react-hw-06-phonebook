@@ -1,4 +1,3 @@
-// import { Component } from 'react';
 import React from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,16 +31,17 @@ export const ContactForm = () => {
   // };
 
   const onAddContact = (name, number) => {
-    // if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
-    //   return alert(`${name} already in contact`);
-    // }
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+    if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
+      return alert(`${name} already in contact`);
+    }
+    // const contact = {
+    //   id: nanoid(),
+    //   name,
+    //   number,
+    //   // ...contacts,
+    // };
 
-    dispatch(addContact(contact));
+    dispatch(addContact(name, number));
   };
 
   return (
