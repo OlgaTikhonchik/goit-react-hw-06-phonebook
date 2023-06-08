@@ -7,7 +7,6 @@ const contactsSlice = createSlice({
   reducers: {
     addContact(state, action) {
       state.push(action.payload);
-      // state.contacts = [...state.contacts, action.payload];
     },
     deleteContact(state, action) {
       const index = state.findIndex(contact => contact.id === action.payload);
