@@ -25,11 +25,6 @@ export const ContactForm = () => {
   console.log(contacts);
   const dispatch = useDispatch();
 
-  // const handleSubmit = (values, { resetForm }) => {
-  //   onSubmit(values.name, values.number);
-  //   resetForm();
-  // };
-
   const onAddContact = (name, number) => {
     if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
       return alert(`${name} already in contact`);
