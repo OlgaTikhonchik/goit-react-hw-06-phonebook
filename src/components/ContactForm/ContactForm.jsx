@@ -25,18 +25,23 @@ export const ContactForm = () => {
   console.log(contacts);
   const dispatch = useDispatch();
 
-  const onAddContact = (name, number) => {
-    if (contacts.some(el => el.name.toLowerCase() === name.toLowerCase())) {
-      return alert(`${name} already in contact`);
-    }
-    // const contact = {
-    //   id: nanoid(),
-    //   name,
-    //   number,
-    //
-    // };
+  const isDublicate = ({ name, number }) => {
+    const normalizedName = name.toLowerCase().trim();
+    const normalizedNumber = number.trim();
 
-    dispatch(addContact(name, number));
+    const dublicate = contacts.find(
+      contact =>
+        contact.name.toLowerCase().trim() === normalizedName ||
+        contact.number.trim() === normalizedNumber
+    );
+    return Boolean(dublicate);
+  };
+
+  const onAddContact = ({ name, number, id = nanoid() }) => {
+    if (isDublicate({ name, number, id })) {
+      return alert('This contact is already in contacts');
+    }
+    dispatch(addContact({ id, name, number }));
   };
 
   return (
@@ -46,6 +51,7 @@ export const ContactForm = () => {
         onAddContact({ ...values });
         resetForm();
       }}
+      // onSubmit={handleSubmit}
       validationSchema={schema}
     >
       <FormContact autoComplete="off">
