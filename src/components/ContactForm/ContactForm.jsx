@@ -37,17 +37,24 @@ export const ContactForm = () => {
     return Boolean(dublicate);
   };
 
-  const onAddContact = ({ name, number, id = nanoid() }) => {
-    if (isDublicate({ name, number, id })) {
-      return alert('This contact is already in contacts');
-    }
-    dispatch(addContact({ id, name, number }));
-  };
+  // const onAddContact = ({ name, number, id = nanoid() }) => {
+  //   if (isDublicate({ name, number, id })) {
+  //     return alert('This contact is already in contacts');
+  //   }
+  //   dispatch(addContact({ id, name, number }));
+  // };
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
+        const onAddContact = ({ name, number, id = nanoid() }) => {
+          if (isDublicate({ name, number, id })) {
+            return alert('This contact is already in contacts');
+          }
+          dispatch(addContact({ id, name, number }));
+          resetForm();
+        };
         onAddContact({ ...values });
         resetForm();
       }}
